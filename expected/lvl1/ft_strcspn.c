@@ -14,5 +14,5 @@ size_t	ft_strcspn(const char *s, const char *reject){
 			}
 		if (flag == 1) break;
 	}
-	return (i);
+	return i;
 }

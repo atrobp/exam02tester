@@ -14,7 +14,9 @@ lvl3=("flood_fil" "fprime" "ft_itoa" "ft_list_foreach" "ft_list_remove_if" "ft_s
 # declare -a str=("   test" "42")
 # str=("abc" "FOR PONY" "this        ...    is sparta, then again, maybe    not" "   " "  lorem,ipsum  " "" "		this is a very very very very v..ve..very long string or is it?")
 str=("abc" "FOR PONY" "this	 is	 sparta 	" "	  	loremm,ipsum	 	 " "42   			")
-for i in {0..4}; do
+lvl1test=("abc" "My horse is Amazing" "Hello World" "	 42		 ")
+
+for i in {0..3}; do
 	echo "${grnbgrd}-------- LEVEL | $i --------"${white}
 	# echo ${white} "${grn}----------${white}LEVEL | $i ${red}---------"
 	if test -d "./rendu/level$i"; then
@@ -108,7 +110,55 @@ for i in {0..4}; do
 			done
 		elif [ $i == 1 ]; then
 			for exo in ${lvl1[@]}; do
-				echo "$exo"
+				echo "${white}$exo"
+				if test -f "./rendu/level$i/$exo.c"; then
+					if [ $exo == "alpha_mirror" ] || [ $exo == "last_word" ]; then
+						cc ./expected/lvl$i/$exo.c -o $exo
+						cc ./rendu/level$i/$exo.c -o student$exo
+						if ! diff -q <(./$exo) <(./student$exo) >> output.txt; then
+								echo -ne "${red}KO "
+							else
+								echo -ne "${grn}OK "
+							fi
+						for test in "${str[@]}" "${lvl1test[@]}"; do
+							if ! diff -q <(./$exo "$test") <(./student$exo "$test") >> output.txt; then
+								echo -ne "${red}KO "
+							else
+								echo -ne "${grn}OK "
+							fi
+						done
+					elif [ $exo == "inter" ] || [ $exo == "union" ] || [ $exo == "wdmatch" ]; then
+						cc ./expected/lvl$i/$exo.c -o $exo
+						cc ./rendu/level$i/$exo.c -o student$exo
+						if ! diff -q <(./$exo) <(./student$exo) >> output.txt; then
+								echo -ne "${red}KO "
+							else
+								echo -ne "${grn}OK "
+							fi
+						for test in "paqefwtdjetyiytjneytjoeyjnejeyj" "gtwthgdwthdwfteewhrtag6h4ffdhsd" "cette phrase ne cache rien"; do
+							if ! diff -q <(./$exo "padinton" "$test") <(./student$exo "padinton" "$test") >> output.txt; then
+								echo -ne "${red}KO "
+							else
+								echo -ne "${grn}OK "
+							fi
+							if ! diff -q <(./$exo "ddf6vewg64f" "$test") <(./student$exo "ddf6vewg64f" "$test") >> output.txt; then
+								echo -ne "${red}KO "
+							else
+								echo -ne "${grn}OK "
+							fi
+							if ! diff -q <(./$exo "rien" "$test") <(./student$exo "rien" "$test") >> output.txt; then
+								echo -ne "${red}KO "
+							else
+								echo -ne "${grn}OK "
+							fi
+						done
+					fi
+					echo ""
+					rm -r *$exo
+				else
+					echo "${red}$exo.c not found"
+				fi
+				sleep 1
 			done
 		elif [ $i == 2 ]; then
 			for exo in ${lvl2[@]}; do
