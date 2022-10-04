@@ -9,9 +9,9 @@ int	ft_strlen(char *str){
 	return i;
 }
 
-char    **ft_split(char *str){
+char	**ft_split(char *str){
 	char	**tab = malloc(sizeof(str) * ft_strlen(str) + 1);
-	int	index = 0, i = 0;
+	int		index = 0, i = 0;
 
 	if (tab){
 		tab[index] = malloc(sizeof(str) * ft_strlen(str) + 1);
