@@ -152,6 +152,19 @@ for i in {0..3}; do
 								echo -ne "${grn}OK "
 							fi
 						done
+					elif [ $exo == "max" ]; then
+						cc ./expected/lvl1/main.c ./expected/lvl1/$exo.c  -o $exo
+						cc ./expected/lvl1/main.c ./rendu/level1/$exo.c -o student$exo
+						if ! diff -q <(./$exo "NULL") <(./student$exo "NULL") >> output.txt; then
+								echo -ne "${red}KO "
+							else
+								echo -ne "${grn}OK "
+							fi
+						if ! diff -q <(./$exo "5" "1" "0" "42") <(./student$exo "5" "1" "0" "42") >> output.txt; then
+								echo -ne "${red}KO "
+							else
+								echo -ne "${grn}OK "
+							fi
 					fi
 					echo ""
 					rm -r *$exo

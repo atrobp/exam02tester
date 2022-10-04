@@ -11,6 +11,3 @@ int	max(int* tab, unsigned int len){
 				lemax = tab[i];
 	return lemax;
 }
-
-
-
