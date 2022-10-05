@@ -10,7 +10,7 @@ Tester will compile both your and my code and see if there's a difference -- if 
 I tried to include test done by the moulinette during the exam aswell as random personnal test. If you get an OK, but KO in the exam let me know :)
 
 # how to setup ?
-Clone the repo and add your .c file in their respecting level in rendu folder followed by a make command
+Clone the repo and add your .c file in their respecting level in rendu folder and run command : bash exam02.sh
 
 
 Happy coding 🤡
