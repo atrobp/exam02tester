@@ -153,7 +153,7 @@ for i in {0..3}; do
 							fi
 						done
 					elif [ $exo == "max" ]; then
-						cc ./expected/lvl1/main.c ./expected/lvl1/$exo.c  -o $exo
+						cc ./expected/lvl1/main.c ./expected/lvl1/$exo.c -o $exo
 						cc ./expected/lvl1/main.c ./rendu/level1/$exo.c -o student$exo
 						if ! diff -q <(./$exo "NULL") <(./student$exo "NULL") >> output.txt; then
 								echo -ne "${red}KO "
